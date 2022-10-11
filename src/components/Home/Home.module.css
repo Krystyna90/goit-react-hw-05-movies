@@ -1,0 +1,15 @@
+.Header {
+  height: 80px;
+  margin-bottom: 10px;
+  border-style: groove;
+  border-color: aqua;
+}
+.MovieList {
+  list-style: none;
+}
+
+.MovieItem {
+  color: blue;
+  font: 20px Georgia;
+  text-decoration: none;
+}

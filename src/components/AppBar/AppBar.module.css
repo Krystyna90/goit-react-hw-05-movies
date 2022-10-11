@@ -1,0 +1,27 @@
+/* .Navigation {
+  display: flex;
+  justify-content: space-evenly;
+} */
+
+.Header {
+  display: flex;
+  justify-content: space-evenly;
+  height: 80px;
+  margin-bottom: 10px;
+  border-style: groove;
+  border-color: aqua;
+}
+
+.NavigationLink {
+  height: 30px;
+  width: 50px;
+  border-radius: 4px;
+  text-decoration: none;
+  color: blue;
+}
+
+.NavigationLink:hover:not(.active),
+.NavigationLink:focus-visible:not(.active) {
+  background-color: blue;
+  color: white;
+}
