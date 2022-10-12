@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { NavLink, Outlet, useParams } from "react-router-dom";
+import fetchMoviesDetails from "../fetch/fetch-movie-details";
 import css from "../components/AppBar/AppBar.module.css";
 
 const navItems = [
@@ -13,22 +14,38 @@ const navItems = [
   },
 ];
 
-export const MovieId = ({ movies }) => {
+export const MovieId = () => {
   const { movieId } = useParams();
-
-  const [movie, setMovie] = useState([]);
+  const [movie, setMovie] = useState(null);
 
   useEffect(() => {
-    movies.map((movie) => {
-      if (movie.movieId === movieId)  setMovie(movie);
-    });
+    fetchMoviesDetails(movieId).then((result) => setMovie(result));
   }, [movieId]);
+
   console.log(movie);
 
   return (
     <>
-      <div className={css.MovieCard}>
-        <h1>{movieId}</h1>
+      {movie && (
+        <div className={css.MovieCard}>
+          <div>
+            <img
+              src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+              alt={movie.original_title}
+            ></img>
+          </div>
+          <div>
+            <h2> {movie.original_title}</h2>
+            <p>User score: {movie.vote_average}</p>
+            <h4>Overview</h4>
+            <p>{movie.overview}</p>
+            <h4>Genres</h4>
+            <p>{movie.genres.map((genre) => genre.name).join(", ")}</p>
+          </div>
+        </div>
+      )}
+
+      <div>
         <h3>Additional information</h3>
         {navItems.map((item) => (
           <li key={item.href}>

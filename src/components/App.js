@@ -13,11 +13,7 @@ const App = () => {
       const moviesArray = results.map((result) => ({
         movieName: result.original_title,
         movieId: result.id,
-        movieImg: result.poster_path,
-        movieOverview: result.overview,
-        movieScore: result.vote_average,
       }));
-      console.log(moviesArray);
       setMovies(moviesArray);
     });
   }, []);
