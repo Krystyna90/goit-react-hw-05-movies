@@ -1,0 +1,26 @@
+.SearchContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  width: 100%;
+  max-width: 600px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.SearchInput {
+  display: inline-block;
+  width: 300px;
+  height: 50px;
+  font: inherit;
+  font-size: 20px;
+  border-radius: 30px;
+  outline: none;
+  padding-left: 20px;
+  padding-right: 110px;
+  margin-right: 20px;
+  color: black;
+}

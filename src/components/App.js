@@ -3,6 +3,9 @@ import { useState, useEffect } from "react";
 import fetchMovies from "../fetch/fetch-api";
 import { AppBar } from "./AppBar/AppBar";
 import Home from "./Home/Home";
+import Cast from "./Cast/Cast";
+import Reviews from "./Reviews/Reviews";
+import { Movies } from "../pages/Movies";
 import { MovieId } from "../pages/MovieId";
 
 const App = () => {
@@ -24,9 +27,10 @@ const App = () => {
         <Route path="/" element={<AppBar></AppBar>}>
           <Route index element={<Home movies={movies}></Home>}></Route>
           <Route path="movies" element={<Outlet></Outlet>}>
+            <Route index element={<Movies></Movies>}></Route>
             <Route path=":movieId" element={<MovieId movies={movies} />}>
-              <Route path="cast" element={<div>Cast</div>}></Route>
-              <Route path="reviews" element={<div>Reviews</div>}></Route>
+              <Route path="cast" element={<Cast></Cast>}></Route>
+              <Route path="reviews" element={<Reviews></Reviews>}></Route>
             </Route>
           </Route>
         </Route>

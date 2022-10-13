@@ -1,0 +1,7 @@
+.CastListContainer {
+  margin-top: 20px;
+}
+.CastItem {
+  display: flex;
+  flex-direction: column;
+}

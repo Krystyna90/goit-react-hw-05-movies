@@ -22,8 +22,6 @@ export const MovieId = () => {
     fetchMoviesDetails(movieId).then((result) => setMovie(result));
   }, [movieId]);
 
-  console.log(movie);
-
   return (
     <>
       {movie && (
