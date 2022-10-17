@@ -1,7 +1,14 @@
-import { useState, useEffect } from "react";
-import { NavLink, Outlet, useParams } from "react-router-dom";
+import { useState, useEffect, Suspense } from "react";
+import {
+  NavLink,
+  Link,
+  Outlet,
+  useParams,
+  useLocation,
+} from "react-router-dom";
 import fetchMoviesDetails from "../fetch/fetch-movie-details";
 import css from "../components/AppBar/AppBar.module.css";
+import back from "../images/back.png";
 
 const navItems = [
   {
@@ -14,9 +21,11 @@ const navItems = [
   },
 ];
 
-export const MovieId = () => {
+const MovieId = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
+  const location = useLocation();
+  const backLink = location.state?.from ?? "/";
 
   useEffect(() => {
     fetchMoviesDetails(movieId).then((result) => setMovie(result));
@@ -24,6 +33,9 @@ export const MovieId = () => {
 
   return (
     <>
+      <Link to={backLink}>
+        <img src={back} alt="Back" width="50" height="40"></img>
+      </Link>
       {movie && (
         <div className={css.MovieCard}>
           <div>
@@ -52,8 +64,12 @@ export const MovieId = () => {
             </NavLink>
           </li>
         ))}
-        <Outlet></Outlet>
+        <Suspense fallback={null}>
+          <Outlet></Outlet>
+        </Suspense>
       </div>
     </>
   );
 };
+
+export default MovieId;

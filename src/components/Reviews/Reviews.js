@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { ReviewList } from "../ReviewList/ReviewList";
+import ReviewList from "../ReviewList/ReviewList";
 import fetchMovieReviews from "../../fetch/fetch-movie-reviews";
 
 export default function Reviews() {
@@ -19,10 +19,9 @@ export default function Reviews() {
       }
     });
   }, [movieId]);
-  console.log(reviews);
+
   return (
     <>
-      {/* {reviews && <ReviewList reviews={reviews}></ReviewList>} */}
       {loading === "Rejected" && <p>There is no reviews yet</p>}
       {loading === "Resolved" && <ReviewList reviews={reviews}></ReviewList>}
     </>

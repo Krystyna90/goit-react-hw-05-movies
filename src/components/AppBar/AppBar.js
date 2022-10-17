@@ -1,4 +1,4 @@
-import React from "react";
+import { Suspense } from "react";
 import { Outlet, NavLink } from "react-router-dom";
 import css from "./AppBar.module.css";
 
@@ -13,7 +13,7 @@ const navItems = [
   },
 ];
 
-export const AppBar = () => {
+const AppBar = () => {
   return (
     <div className={css.Navigation}>
       <div className={css.Header}>
@@ -23,7 +23,11 @@ export const AppBar = () => {
           </NavLink>
         ))}
       </div>
-      <Outlet></Outlet>
+      <Suspense fallback={null}>
+        <Outlet></Outlet>
+      </Suspense>
     </div>
   );
 };
+
+export default AppBar;

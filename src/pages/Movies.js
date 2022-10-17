@@ -1,37 +1,54 @@
 import { useState, useEffect } from "react";
-// import { useSearchParams } from "react-router-dom";
-import { SearchBox } from "../components/SearchBox/SearchBox";
+import { useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+import SearchBox from "../components/SearchBox/SearchBox";
 import Home from "../components/Home/Home";
 import fetchMoviesKeyword from "../fetch/fetch-movie-keyword";
+import back from "../images/back.png";
 
-export const Movies = () => {
-  // const [searchParams, setSearchParams] = useSearchParams();
+const Movies = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [movies, setMovies] = useState([]);
   const [movieSubmit, setMovieSubmit] = useState("");
-  // const filter = searchParams.get("filter") ?? "";
+  const query = searchParams.get("query") ?? "";
+
+  const changeInput = (value) => {
+    setSearchParams(value !== "" ? { query: value } : {});
+  };
 
   useEffect(() => {
-    fetchMoviesKeyword(movieSubmit, 1).then(({ results }) => {
-      const moviesArray = results.map((result) => ({
-        movieName: result.original_title,
-        movieId: result.id,
-      }));
-      setMovies(moviesArray);
-    });
+    if (movieSubmit !== "") {
+      fetchMoviesKeyword(movieSubmit, 1).then(({ results }) => {
+        if (results.length === 0) alert("There are no results");
+        const moviesArray = results.map((result) => ({
+          movieName: result.original_title,
+          movieId: result.id,
+        }));
+        setMovies(moviesArray);
+      });
+    }
   }, [movieSubmit]);
 
-  // const changeSearchBox = (value) => {
-  //   setSearchParams(value !== "" ? { filter: value } : {});
-  // };
   const onSearchSubmit = (movie) => {
     if (movie !== movieSubmit) {
       setMovieSubmit(movie);
+    } else {
+      alert("What movies are you looking for? ");
     }
   };
   return (
     <div>
-      <SearchBox submitForm={onSearchSubmit}></SearchBox>
+      <Link to="/">
+        <img src={back} alt="Back" width="50" height="40"></img>
+      </Link>
+      <SearchBox
+        submitForm={onSearchSubmit}
+        onChange={changeInput}
+        value={query}
+      ></SearchBox>
       {movieSubmit && <Home movies={movies}></Home>}
     </div>
   );
 };
+
+export default Movies;

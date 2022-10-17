@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import noImage from "../../images/noImage.webp";
 
-export const CastList = ({ cast }) => {
+const CastList = ({ cast }) => {
   return (
     <div className={css.CastListContainer}>
       {cast.map(({ profile_path, name, character }) => (
@@ -27,6 +27,7 @@ export const CastList = ({ cast }) => {
     </div>
   );
 };
+export default CastList;
 
 CastList.propTypes = {
   cast: PropTypes.arrayOf(

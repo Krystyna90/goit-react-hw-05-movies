@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import css from "./ReviewList.module.css";
 
-export const ReviewList = ({ reviews }) => {
+const ReviewList = ({ reviews }) => {
   return (
     <ul>
       {reviews.map(({ author, content }) => (
@@ -14,6 +14,8 @@ export const ReviewList = ({ reviews }) => {
     </ul>
   );
 };
+
+export default ReviewList;
 
 ReviewList.propTypes = {
   reviews: PropTypes.arrayOf(
