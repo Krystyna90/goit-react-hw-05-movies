@@ -7,6 +7,7 @@ export default function Home({ movies }) {
   const location = useLocation();
   return (
     <>
+      <h1>Trending today</h1>
       <ul className={css.MovieList}>
         {movies.map(({ movieName, movieId }) => (
           <li key={movieId}>
