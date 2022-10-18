@@ -26,6 +26,7 @@ const MovieId = () => {
   const [movie, setMovie] = useState(null);
   const location = useLocation();
   const backLink = location.state?.from ?? "/";
+  console.log(location);
 
   useEffect(() => {
     fetchMoviesDetails(movieId).then((result) => setMovie(result));
@@ -62,7 +63,7 @@ const MovieId = () => {
             <NavLink
               className={css.NavigationLink}
               to={item.href}
-              state={{ from: "/movies" }}
+              state={{ from: location.state.from }}
             >
               {item.text}
             </NavLink>
