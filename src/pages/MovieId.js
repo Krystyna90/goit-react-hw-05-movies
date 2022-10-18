@@ -59,7 +59,11 @@ const MovieId = () => {
         <h3>Additional information</h3>
         {navItems.map((item) => (
           <li key={item.href}>
-            <NavLink className={css.NavigationLink} to={item.href}>
+            <NavLink
+              className={css.NavigationLink}
+              to={item.href}
+              state={{ from: "/movies" }}
+            >
               {item.text}
             </NavLink>
           </li>

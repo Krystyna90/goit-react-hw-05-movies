@@ -5,8 +5,7 @@ import AppBar from "./AppBar/AppBar";
 import Home from "./Home/Home";
 import Cast from "./Cast/Cast";
 import Reviews from "./Reviews/Reviews";
-// import Movies from "../pages/Movies";
-// import MovieId from "../pages/MovieId";
+import NotFoundElement from "./NotFoundElement/NotFoundElement";
 
 const Movies = lazy(() => import("../pages/Movies"));
 const MovieId = lazy(() => import("../pages/MovieId"));
@@ -37,6 +36,7 @@ const App = () => {
             </Route>
           </Route>
         </Route>
+        <Route path="*" element={<NotFoundElement></NotFoundElement>}></Route>
       </Routes>
     </>
   );

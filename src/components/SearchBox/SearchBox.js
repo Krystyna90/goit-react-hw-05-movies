@@ -1,11 +1,25 @@
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import PropTypes from "prop-types";
 import SearchButton from "../SearchButton/SearchButton";
 import css from "./SearchBox.module.css";
 
-const SearchBox = ({ submitForm, onChange, value }) => {
+const SearchBox = ({ submitForm }) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  let [input, setInput] = useState("");
+  const query = searchParams.get("query") ?? "";
+
+  useEffect(() => {
+    if (query.length !== 0) setInput(query);
+  }, [query]);
+
+  const onChangeInput = (e) => {
+    setInput(e.target.value);
+  };
   const onSubmit = (e) => {
     e.preventDefault();
-    submitForm(value.trim().toLowerCase());
+    submitForm(input.trim().toLowerCase());
+    setSearchParams(input !== "" ? { query: input } : {});
   };
 
   return (
@@ -16,8 +30,8 @@ const SearchBox = ({ submitForm, onChange, value }) => {
           type="text"
           autoComplete="off"
           placeholder="Your movie"
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
+          value={input}
+          onChange={onChangeInput}
         ></input>
         <SearchButton></SearchButton>
       </div>
@@ -26,8 +40,6 @@ const SearchBox = ({ submitForm, onChange, value }) => {
 };
 SearchBox.propTypes = {
   submitForm: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
-  value: PropTypes.string.isRequired,
 };
 
 export default SearchBox;
